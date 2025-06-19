@@ -6,6 +6,77 @@ POST http://localhost:3000/render
 Content-Type: application/json
 
 {
- "title": "Hello",
- "body": "Welcome to MJML"
+  "tagName": "mjml",
+  "attributes": {},
+  "children": [
+    {
+      "tagName": "mj-head",
+      "children": [
+        {
+          "tagName": "mj-html-attributes",
+          "children": [
+            {
+              "tagName": "mj-selector",
+              "attributes": {
+                "path": ".custom"
+              },
+              "children": [
+                {
+                  "tagName": "mj-html-attribute",
+                  "attributes": {
+                    "name": "data-id"
+                  },
+                  "content": "42"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tagName": "mj-body",
+      "attributes": {
+        "width": "600px"
+      },
+      "children": [
+        {
+          "tagName": "mj-section",
+          "attributes": {},
+          "children": [
+            {
+              "tagName": "mj-column",
+              "attributes": {},
+              "children": [
+                {
+                  "tagName": "mj-image",
+                  "attributes": {
+                    "width": "100px",
+                    "src": "/assets/img/logo-small.png"
+                  }
+                },
+                {
+                  "tagName": "mj-divider",
+                  "attributes": {
+                    "border-color": "#F46E43"
+                  }
+                },
+                {
+                  "tagName": "mj-text",
+                  "attributes": {
+                    "font-size": "20px",
+                    "color": "#F45E43",
+                    "font-family": "Helvetica",
+                    "css-class": "custom",
+                    "text-align": "center"
+                  },
+                  "content": "Hello World"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
