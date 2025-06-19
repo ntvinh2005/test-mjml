@@ -63,7 +63,7 @@ const jsonToMjmlMarkup = (jsonData: any): string => {
 const JsonToMjmlController = {
   translate: async (req: Request, res: Response) => {
     try {
-      const mjmlMarkup = jsonToMjmlMarkup(req.body);
+      const mjmlMarkup = jsonToMjmlMarkup(req.body.json);
 
       // It's cleaning time after playing kids. Do your chore.
       const singleLineMjml = mjmlMarkup
@@ -71,9 +71,9 @@ const JsonToMjmlController = {
         .replace(/\\/g, "");
       console.log(singleLineMjml);
 
-      res.json({ mjml: singleLineMjml });
+      res.json({ code: 200, mjml: singleLineMjml });
     } catch (e: any) {
-      res.status(500).json({ error: e.message });
+      res.status(500).json({ code: 500, error: e.message });
     }
   },
 };

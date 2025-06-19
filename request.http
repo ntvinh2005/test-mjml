@@ -11,6 +11,7 @@ POST http://localhost:3000/api/v1/json-html
 Content-Type: application/json
 
 {
+"json": {
   "tagName": "mjml",
   "attributes": {},
   "children": [
@@ -85,6 +86,25 @@ Content-Type: application/json
     }
   ]
 }
+}
+
+//Test object rỗng, vẫn qua vì giờ hàm validate check chỉ cần là object là được
+### 
+POST http://localhost:3000/api/v1/json-html
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:3000/api/v1/json-html
+Content-Type: application/json
+
+
+###
+POST http://localhost:3000/api/v1/json-html
+Content-Type: application/json
+
+{"json": "12343423423"}
 
 //Cái này để request từ json sang mjml
 ### 
@@ -92,79 +112,81 @@ POST http://localhost:3000/api/v1/json-mjml
 Content-Type: application/json
 
 {
-  "tagName": "mjml",
-  "attributes": {},
-  "children": [
-    {
-      "tagName": "mj-head",
-      "children": [
-        {
-          "tagName": "mj-html-attributes",
-          "children": [
-            {
-              "tagName": "mj-selector",
-              "attributes": {
-                "path": ".custom"
-              },
-              "children": [
-                {
-                  "tagName": "mj-html-attribute",
-                  "attributes": {
-                    "name": "data-id"
-                  },
-                  "content": "42"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "tagName": "mj-body",
-      "attributes": {
-        "width": "600px"
+  "json": {
+    "tagName": "mjml",
+    "attributes": {},
+    "children": [
+      {
+        "tagName": "mj-head",
+        "children": [
+          {
+            "tagName": "mj-html-attributes",
+            "children": [
+              {
+                "tagName": "mj-selector",
+                "attributes": {
+                  "path": ".custom"
+                },
+                "children": [
+                  {
+                    "tagName": "mj-html-attribute",
+                    "attributes": {
+                      "name": "data-id"
+                    },
+                    "content": "42"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
-      "children": [
-        {
-          "tagName": "mj-section",
-          "attributes": {},
-          "children": [
-            {
-              "tagName": "mj-column",
-              "attributes": {},
-              "children": [
-                {
-                  "tagName": "mj-image",
-                  "attributes": {
-                    "width": "100px",
-                    "src": "/assets/img/logo-small.png"
-                  }
-                },
-                {
-                  "tagName": "mj-divider",
-                  "attributes": {
-                    "border-color": "#F46E43"
-                  }
-                },
-                {
-                  "tagName": "mj-text",
-                  "attributes": {
-                    "font-size": "20px",
-                    "color": "#F45E43",
-                    "font-family": "Helvetica",
-                    "css-class": "custom",
-                    "text-align": "center"
+      {
+        "tagName": "mj-body",
+        "attributes": {
+          "width": "600px"
+        },
+        "children": [
+          {
+            "tagName": "mj-section",
+            "attributes": {},
+            "children": [
+              {
+                "tagName": "mj-column",
+                "attributes": {},
+                "children": [
+                  {
+                    "tagName": "mj-image",
+                    "attributes": {
+                      "width": "100px",
+                      "src": "/assets/img/logo-small.png"
+                    }
                   },
-                  "content": "Hello World"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  {
+                    "tagName": "mj-divider",
+                    "attributes": {
+                      "border-color": "#F46E43"
+                    }
+                  },
+                  {
+                    "tagName": "mj-text",
+                    "attributes": {
+                      "font-size": "20px",
+                      "color": "#F45E43",
+                      "font-family": "Helvetica",
+                      "css-class": "custom",
+                      "text-align": "center"
+                    },
+                    "content": "Hello World"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
 
 //Cái này từ mjml sang html
@@ -174,4 +196,22 @@ Content-Type: application/json
 
 {
   "mjml": "<mjml><mj-head><mj-attributes><mj-text align=\"center\"/></mj-attributes></mj-head><mj-body width=\"600px\"><mj-section><mj-column><mj-image width=\"100px\" src=\"/assets/img/logo-small.png\"/><mj-divider border-color=\"#F46E43\"/><mj-text font-size=\"20px\" color=\"#F45E43\" font-family=\"Helvetica\" css-class=\"custom\" align=\"center\">Hello World</mj-text></mj-column></mj-section></mj-body></mjml>"
+}
+
+//Lỗi 400 format body
+###
+POST http://localhost:3000/api/v1/mjml-html
+Content-Type: application/json
+
+{
+  "mjml": "<mj-head><mj-attributes><mj-text align=\"center\"/></mj-attributes></mj-head><mj-body width=\"600px\"><mj-section><mj-column><mj-image width=\"100px\" src=\"/assets/img/logo-small.png\"/><mj-divider border-color=\"#F46E43\"/><mj-text font-size=\"20px\" color=\"#F45E43\" font-family=\"Helvetica\" css-class=\"custom\" align=\"center\">Hello World</mj-text></mj-column></mj-section></mj-body></mjml>"
+}
+
+//Test truyền rỗng để test validate
+###
+POST http://localhost:3000/api/v1/mjml-html
+Content-Type: application/json
+
+{
+  "mjml": ""
 }

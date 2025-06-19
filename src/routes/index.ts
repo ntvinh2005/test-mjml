@@ -20,7 +20,7 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/health", (req: Request, res: Response) => {
   res.json({
     success: true,
-    message: "Máy chủ đang hoạt động",
+    message: "Still working... but I have bad feelings",
     timestamp: new Date().toISOString(),
     version: "1.0.0",
   });
@@ -47,7 +47,7 @@ router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({
     success: false,
-    message: "Lỗi máy chủ",
+    message: "Internal Server Error",
     error: err.message,
     timestamp: new Date().toISOString(),
   });
