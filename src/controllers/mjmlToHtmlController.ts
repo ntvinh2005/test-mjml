@@ -1,20 +1,25 @@
 import { Request, Response } from "express";
-import json2mjml from "mjml";
 import mjml2html from "mjml";
 
 const MjmlToHtmlController = {
-  translate: async (req: Request, res: Response) => {
+  translate: async (req: Request, res: Response): Promise<void> => {
     try {
-      const mjmlResult = json2mjml(req.body);
-      const mjml = mjmlResult.html;
-      console.log("mjmlResult : ", mjmlResult.html);
-      const { html, errors } = mjml2html(mjml);
+      const mjml = req.body.mjml;
+      const { html, errors: htmlErrors } = mjml2html(mjml, {
+        beautify: false,
+        minify: true,
+      });
 
-      if (errors && errors.length) {
-        res.status(400).json({ errors });
-      } else {
-        res.json({ html });
+      if (htmlErrors?.length) {
+        res.status(400).json({ errors: htmlErrors });
+        return; // early exit, no return value
       }
+
+      const singleLineHtml = html.replace(/(\r\n|\n|\r)/g, "");
+
+      console.log(singleLineHtml);
+
+      res.json({ html: singleLineHtml });
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }

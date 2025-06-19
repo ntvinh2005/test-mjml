@@ -27,22 +27,22 @@ router.get("/health", (req: Request, res: Response) => {
 });
 
 // Connect sub router
-router.use(`${API_VERSION}/translate-json-html`, JsonToHtmlRoutes);
-router.use(`${API_VERSION}/translate-json-mjml`, JsonToMjmlRoutes);
-router.use(`${API_VERSION}/translate-mjml-html`, MjmlToHtmlRoutes);
+router.use(`${API_VERSION}`, JsonToHtmlRoutes);
+router.use(`${API_VERSION}`, JsonToMjmlRoutes);
+router.use(`${API_VERSION}`, MjmlToHtmlRoutes);
 
 // Handle 404
 router.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
-    message: "Không tìm thấy đường dẫn",
+    message: "Cannot find the route",
     path: req.originalUrl,
     method: req.method,
     timestamp: new Date().toISOString(),
   });
 });
 
-// Xử lý lỗi chung
+// internal server error please fix :')
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({

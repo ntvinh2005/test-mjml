@@ -3,6 +3,6 @@ import JsonToHtmlController from "../controllers/jsonToHtmlController";
 
 const router: Router = Router();
 
-router.post("/translate-json-html", JsonToHtmlController.translate);
+router.post("/json-html", JsonToHtmlController.translate);
 
 export default router;

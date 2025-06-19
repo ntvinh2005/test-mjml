@@ -3,6 +3,6 @@ import JsonToMjmlController from "../controllers/jsonToMjmlController";
 
 const router: Router = Router();
 
-router.post("/translate-json-mjml", JsonToMjmlController.translate);
+router.post("/json-mjml", JsonToMjmlController.translate);
 
 export default router;

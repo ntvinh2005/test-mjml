@@ -3,6 +3,6 @@ import MjmlToHtmlController from "../controllers/mjmlToHtmlController";
 
 const router: Router = Router();
 
-router.post("/translate-mjml-html", MjmlToHtmlController.translate);
+router.post("/mjml-html", MjmlToHtmlController.translate);
 
 export default router;
