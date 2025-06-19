@@ -1,0 +1,11 @@
+GET http://localhost:3000/
+Content-Type: application/json
+
+### 
+POST http://localhost:3000/render
+Content-Type: application/json
+
+{
+ "title": "Hello",
+ "body": "Welcome to MJML"
+}
